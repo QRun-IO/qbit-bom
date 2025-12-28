@@ -42,7 +42,7 @@
       <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
       <!-- use revision property in children -->
-      <revision>1.5.1-SNAPSHOT</revision>
+      <revision>1.5.1</revision>
    </properties>
 
    <!-- Common dependency BOMs -->
