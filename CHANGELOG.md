@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.1] - 2025-12-28
+
+### Fixed
+- Fixed JUnit BOM version mismatch: updated from 5.12.1 to 6.0.1 to align with JUnit Jupiter 6.0.1 from qqq-bom-pom 0.35.0
+
 ## [1.5.0] - 2025-12-28
 
 ### Changed
