@@ -37,12 +37,12 @@
    </developers>
 
    <properties>
-      <java.version>17</java.version>
+      <java.version>21</java.version>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
       <!-- use revision property in children -->
-      <revision>1.4.0</revision>
+      <revision>1.5.0-SNAPSHOT</revision>
    </properties>
 
    <!-- Common dependency BOMs -->
@@ -52,7 +52,7 @@
          <dependency>
             <groupId>com.kingsrook.qqq</groupId>
             <artifactId>qqq-bom-pom</artifactId>
-            <version>0.27.9</version>
+            <version>0.35.0</version>
             <type>pom</type>
             <scope>import</scope>
          </dependency>
@@ -60,7 +60,7 @@
          <dependency>
             <groupId>org.junit</groupId>
             <artifactId>junit-bom</artifactId>
-            <version>5.10.0</version>
+            <version>5.12.1</version>
             <type>pom</type>
             <scope>import</scope>
          </dependency>

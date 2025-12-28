@@ -30,7 +30,7 @@ Add to your `pom.xml` in the `<dependencyManagement>` section:
         <dependency>
             <groupId>io.qrun</groupId>
             <artifactId>qbit-bom</artifactId>
-            <version>0.3.0</version>
+            <version>1.5.0</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
@@ -71,11 +71,13 @@ Add to your `pom.xml` in the `<dependencyManagement>` section:
 
 ## Compatibility
 
-| BOM Version | QQQ Core Version |
-|-------------|------------------|
-| 0.3.x | 0.25.0+ |
-| 0.2.x | 0.22.0 - 0.24.x |
-| 0.1.x | 0.20.0 - 0.21.x |
+| BOM Version | QQQ Core Version | Java |
+|-------------|------------------|------|
+| 1.5.x | 0.35.0+ | 21 |
+| 1.4.x | 0.27.0 - 0.34.x | 17 |
+| 0.3.x | 0.25.0 - 0.26.x | 17 |
+| 0.2.x | 0.22.0 - 0.24.x | 17 |
+| 0.1.x | 0.20.0 - 0.21.x | 17 |
 
 ## Project Status
 
