@@ -42,7 +42,7 @@
       <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
       <!-- use revision property in children -->
-      <revision>1.5.1</revision>
+      <revision>1.6.0</revision>
    </properties>
 
    <!-- Common dependency BOMs -->
@@ -52,7 +52,7 @@
          <dependency>
             <groupId>com.kingsrook.qqq</groupId>
             <artifactId>qqq-bom-pom</artifactId>
-            <version>0.35.0</version>
+            <version>0.40.0</version>
             <type>pom</type>
             <scope>import</scope>
          </dependency>
