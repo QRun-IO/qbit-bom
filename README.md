@@ -34,4 +34,4 @@ The parent can be published only after its imported final QQQ BOM is available. 
 
 ## License
 
-See [LICENSE](LICENSE) and [NOTICE](NOTICE).
+Licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
