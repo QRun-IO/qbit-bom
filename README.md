@@ -34,4 +34,32 @@ The parent can be published only after its imported final QQQ BOM is available. 
 
 ## License
 
-See [LICENSE](LICENSE) and [NOTICE](NOTICE).
+### Packaged notices
+
+The packaging change in this source tree copies each consumer's own root
+`LICENSE` and `NOTICE` into `META-INF` in main/test archives and Maven shared
+archive resources used by source/Javadoc archives. Existing main/test resources
+remain included. Consumers must adopt a newly published parent version to receive
+this change; the existing public 2.0.0 artifact is unchanged.
+
+The default `qbit.noticesDirectory` is `${project.basedir}`. In a nested module
+whose files live at the repository root, set it to `${project.basedir}/..` (adjust
+for the actual layout). Do not point it at the build-parent checkout: these are
+the consuming project's notices. If a child overrides `<resources>` or
+`<testResources>`, retain the inherited shared archive resource directory.
+
+After packaging the consumer, explicitly check every produced archive using
+Python 3 and the guard from this checkout:
+
+```bash
+mvn -Prelease -DskipTests -Dgpg.skip=true clean package
+python3 /path/to/qbit-bom/scripts/check-packaged-notices.py --root . target/*.jar
+```
+
+For a multi-module consumer, pass each module's actual JAR paths and its repository
+root. The guard rejects missing archives, missing/duplicate entries and changed
+notice bytes. Packaging-only checks skip runtime tests; existing tests, review
+and release requirements still apply. The publishing workflow does not invoke
+this guard automatically.
+
+Licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE).

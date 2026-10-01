@@ -15,5 +15,6 @@ Key orientation facts (details and caveats in the dossier):
   README's `io.qrun:qbit-bom` coordinates do not exist on Maven Central.
 - v1.6.0 imports `com.kingsrook.qqq:qqq-bom-pom:0.40.0` (Java 21, junit-bom 6.0.1);
   develop pins `0.41.0-SNAPSHOT`, which no longer resolves (qqq renumbered to 4.0.x).
-- Known licensing inconsistency: LICENSE/NOTICE = Apache-2.0, pom `<licenses>` = AGPL-3.0
-  (shipped to Central in 1.6.0), README says Proprietary. See dossier "Maturity & risks".
+- First-party license declarations in the current source are Apache-2.0, consistent
+  with LICENSE and NOTICE. Previously published artifacts retain their original
+  metadata; publish a new version for declaration corrections.
