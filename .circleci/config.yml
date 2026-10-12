@@ -44,7 +44,7 @@ workflows:
             branches:
                ignore: /.*/
             tags:
-              only: [ /v.*/ ]
+              only: [ /^v\d+\.\d+\.\d+$/ ]
 
   publish_hotfix_release:
     jobs:
