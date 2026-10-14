@@ -62,4 +62,4 @@ workflows:
             branches:
                ignore: /.*/
             tags:
-              only: [ /^vd+.d+.d+$/ ]
+              only: [ /^v\d+\.\d+\.\d+$/ ]
