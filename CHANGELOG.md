@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-10-13
+
+### Added
+- Independent `qbit-guardrails` JAR with inheritable Jupiter architecture, extension-contract and stand-in expiry checks (G1, G3, G4).
+- Report-first Enforcer checks for cross-qbit implementation dependencies and first-party SNAPSHOT dependencies (G1, G7).
+- Opt-in enforcement, API/artifact allow-lists, profile skip and strict UI API route forwarding (G2).
+- Fixture tests and rollout/configuration documentation. Existing qbits receive warnings by default.
+
+### Changed
+- Parent revision is 2.1.0; the repository builds and publishes both artifacts as a reactor.
+- Inherited Surefire is pinned to 3.5.6 and Enforcer to 3.6.3, with merging child configuration.
+
 ## [1.5.1] - 2025-12-28
 
 ### Fixed
