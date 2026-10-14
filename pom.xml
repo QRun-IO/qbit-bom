@@ -10,6 +10,10 @@
    <version>${revision}</version>
    <packaging>pom</packaging>
 
+   <modules>
+      <module>qbit-guardrails</module>
+   </modules>
+
    <name>QRunIO QBit Build Parent</name>
    <description>Central build configuration and publishing settings for all QRunIO QBit projects published via our CICD pipelines.</description>
    <url>https://github.com/Kingsrook/qbit-bom</url>
@@ -42,7 +46,13 @@
       <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
       <!-- use revision property in children -->
-      <revision>2.0.0</revision>
+      <revision>2.1.0</revision>
+      <!-- Do not use revision here: children override it with their own version. -->
+      <qbit.guardrails.version>2.1.0</qbit.guardrails.version>
+      <qbit.guardrails.enforce>false</qbit.guardrails.enforce>
+      <qbit.guardrails.allowedQbitArtifacts>com.kingsrook.qbits:qbit-object-storage,com.kingsrook.qbits:*-api</qbit.guardrails.allowedQbitArtifacts>
+      <qbit.guardrails.allowedApiPackages>com.kingsrook.qbits.objectstorage.api</qbit.guardrails.allowedApiPackages>
+      <qbit.guardrails.strictUiApiRoutes>false</qbit.guardrails.strictUiApiRoutes>
    </properties>
 
    <!-- Common dependency BOMs -->
@@ -87,6 +97,108 @@
    </build>
 
    <profiles>
+      <profile>
+         <id>qbit-guardrails</id>
+         <activation>
+            <property><name>!qbit.guardrails.skip</name></property>
+         </activation>
+         <dependencies>
+            <dependency>
+               <groupId>com.kingsrook</groupId>
+               <artifactId>qbit-guardrails</artifactId>
+               <version>${qbit.guardrails.version}</version>
+               <scope>test</scope>
+            </dependency>
+         </dependencies>
+         <build>
+            <pluginManagement>
+               <plugins>
+                  <plugin>
+                     <groupId>org.apache.maven.plugins</groupId>
+                     <artifactId>maven-surefire-plugin</artifactId>
+                     <version>3.5.6</version>
+                     <configuration>
+                        <dependenciesToScan combine.children="append">
+                           <dependency>com.kingsrook:qbit-guardrails</dependency>
+                        </dependenciesToScan>
+                        <systemPropertyVariables>
+                           <qbit.guardrails.basedir>${project.basedir}</qbit.guardrails.basedir>
+                           <qbit.guardrails.outputDirectory>${project.build.outputDirectory}</qbit.guardrails.outputDirectory>
+                           <qbit.guardrails.testOutputDirectory>${project.build.testOutputDirectory}</qbit.guardrails.testOutputDirectory>
+                           <qbit.guardrails.enforce>${qbit.guardrails.enforce}</qbit.guardrails.enforce>
+                           <qbit.guardrails.allowedQbitArtifacts>${qbit.guardrails.allowedQbitArtifacts}</qbit.guardrails.allowedQbitArtifacts>
+                           <qbit.guardrails.allowedApiPackages>${qbit.guardrails.allowedApiPackages}</qbit.guardrails.allowedApiPackages>
+                           <qqq.uiApi.strictRoutes>${qbit.guardrails.strictUiApiRoutes}</qqq.uiApi.strictRoutes>
+                        </systemPropertyVariables>
+                     </configuration>
+                  </plugin>
+                  <plugin>
+                     <groupId>org.apache.maven.plugins</groupId>
+                     <artifactId>maven-enforcer-plugin</artifactId>
+                     <version>3.6.3</version>
+                     <configuration>
+                        <fail>${qbit.guardrails.enforce}</fail>
+                        <failFast>false</failFast>
+                        <rules>
+                           <bannedDependencies>
+                              <message>[qbit-guardrails] G1-deps: cross-qbit implementation dependencies</message>
+                              <searchTransitive>true</searchTransitive>
+                              <excludes>
+                                 <exclude>com.kingsrook.qbits:*:*:*:compile</exclude>
+                                 <exclude>com.kingsrook.qbits:*:*:*:runtime</exclude>
+                                 <exclude>com.kingsrook.qbits:*:*:*:provided</exclude>
+                                 <exclude>com.kingsrook.qbits:*:*:*:system</exclude>
+                              </excludes>
+                              <includes>${qbit.guardrails.allowedQbitArtifacts}</includes>
+                           </bannedDependencies>
+                           <requireReleaseDeps>
+                              <message>[qbit-guardrails] G7: QQQ and qbit dependencies must not be SNAPSHOTs</message>
+                              <onlyWhenRelease>false</onlyWhenRelease>
+                              <failWhenParentIsSnapshot>false</failWhenParentIsSnapshot>
+                              <searchTransitive>true</searchTransitive>
+                              <!-- Includes re-enable checks within exclusions in Enforcer 3.6.3. -->
+                              <excludes><exclude>*:*</exclude></excludes>
+                              <includes>
+                                 <include>com.kingsrook.qqq:*</include>
+                                 <include>com.kingsrook.qbits:*</include>
+                              </includes>
+                           </requireReleaseDeps>
+                        </rules>
+                     </configuration>
+                  </plugin>
+               </plugins>
+            </pluginManagement>
+            <plugins>
+               <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-surefire-plugin</artifactId>
+               </plugin>
+               <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-enforcer-plugin</artifactId>
+                  <executions>
+                     <execution>
+                        <id>qbit-architecture-guardrails</id>
+                        <phase>validate</phase>
+                        <goals><goal>enforce</goal></goals>
+                     </execution>
+                     <!-- Enforcer's transitive resolver omits optional direct dependencies. -->
+                     <execution>
+                        <id>qbit-direct-architecture-guardrails</id>
+                        <phase>validate</phase>
+                        <goals><goal>enforce</goal></goals>
+                        <configuration>
+                           <rules>
+                              <bannedDependencies><searchTransitive>false</searchTransitive></bannedDependencies>
+                              <requireReleaseDeps><searchTransitive>false</searchTransitive></requireReleaseDeps>
+                           </rules>
+                        </configuration>
+                     </execution>
+                  </executions>
+               </plugin>
+            </plugins>
+         </build>
+      </profile>
       <!-- Release profile for Maven Central -->
       <profile>
          <id>release</id>
