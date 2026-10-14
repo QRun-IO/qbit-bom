@@ -63,6 +63,44 @@ class GuardrailChecksTest
 
 
    /***************************************************************************
+    ** Assistant consumers can use the published SPI without exposing internals.
+    ***************************************************************************/
+   @Test
+   void defaultAssistantSpiPackages() throws Exception
+   {
+      String oldPackages = System.getProperty("qbit.guardrails.allowedApiPackages");
+      String oldClasspath = System.getProperty("surefire.test.class.path");
+      try
+      {
+         System.clearProperty("qbit.guardrails.allowedApiPackages");
+         System.setProperty("surefire.test.class.path", temporary.toString());
+         var allowed = new GuardrailProject().apiPackages();
+         assertTrue(GuardrailChecks.allowed("com.kingsrook.qbits.assistant.spi.ModelRequest", "own", allowed));
+         for(String name : List.of("com.kingsrook.qbits.assistant.spiInternal.X", "com.kingsrook.qbits.assistant.engine.ModelPricing", "com.kingsrook.qbits.assistant.provider.X", "com.kingsrook.qbits.assistant.api.X"))
+         {
+            assertFalse(GuardrailChecks.allowed(name, "own", allowed), name);
+         }
+      }
+      finally
+      {
+         restore("qbit.guardrails.allowedApiPackages", oldPackages);
+         restore("surefire.test.class.path", oldClasspath);
+      }
+   }
+
+
+   /***************************************************************************
+    ** The existing API artifact wildcard already covers the assistant provider.
+    ***************************************************************************/
+   @Test
+   void assistantProviderApiArtifact()
+   {
+      assertTrue(GuardrailProject.artifactMatches("com.kingsrook.qbits:*-api", "com.kingsrook.qbits:qbit-assistant-provider-api"));
+      assertFalse(GuardrailProject.artifactMatches("com.kingsrook.qbits:*-api", "com.kingsrook.qbits:qbit-assistant"));
+   }
+
+
+   /***************************************************************************
     ** Architecture analysis uses actual fields and method calls from bytecode.
     ***************************************************************************/
    @Test

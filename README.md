@@ -65,7 +65,7 @@ Configuration properties:
 | --- | --- |
 | `qbit.guardrails.enforce` | `false`; fail on G1, G3, G4 and G7 violations when `true`. |
 | `qbit.guardrails.allowedQbitArtifacts` | Comma-separated Maven `groupId:artifactId` patterns, with `*` wildcards. Default: `com.kingsrook.qbits:qbit-object-storage,com.kingsrook.qbits:qbit-email,com.kingsrook.qbits:*-api`. Replacing this property replaces the allow-list. |
-| `qbit.guardrails.allowedApiPackages` | Comma-separated package prefixes. Default: `com.kingsrook.qbits.objectstorage.api,com.kingsrook.qbits.email.api`. A trailing `..` is accepted. Package boundaries are exact (`apiInternal` is not `api`). |
+| `qbit.guardrails.allowedApiPackages` | Comma-separated package prefixes. Default: `com.kingsrook.qbits.objectstorage.api,com.kingsrook.qbits.email.api,com.kingsrook.qbits.assistant.spi`. A trailing `..` is accepted. Package boundaries are exact (`apiInternal` is not `api`). |
 | `qbit.guardrails.ownPackage` | Optional JVM/CLI property: fourth segment (e.g. `alerts`) or full `com.kingsrook.qbits.alerts` prefix. Otherwise the most frequent fourth segment among main classes is used, with lexical tie-breaking. |
 | `qbit.guardrails.strictUiApiRoutes` | `false`; opt into core's strict runtime route audit in tests. |
 | `qbit.guardrails.skip` | Unset. `-Dqbit.guardrails.skip=true` disables the entire profile. Activation is based on property absence, so even setting it to `false` disables the profile; leave it unset to enable checks. |

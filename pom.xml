@@ -51,7 +51,7 @@
       <qbit.guardrails.version>2.1.0</qbit.guardrails.version>
       <qbit.guardrails.enforce>false</qbit.guardrails.enforce>
       <qbit.guardrails.allowedQbitArtifacts>com.kingsrook.qbits:qbit-object-storage,com.kingsrook.qbits:qbit-email,com.kingsrook.qbits:*-api</qbit.guardrails.allowedQbitArtifacts>
-      <qbit.guardrails.allowedApiPackages>com.kingsrook.qbits.objectstorage.api,com.kingsrook.qbits.email.api</qbit.guardrails.allowedApiPackages>
+      <qbit.guardrails.allowedApiPackages>com.kingsrook.qbits.objectstorage.api,com.kingsrook.qbits.email.api,com.kingsrook.qbits.assistant.spi</qbit.guardrails.allowedApiPackages>
       <qbit.guardrails.strictUiApiRoutes>false</qbit.guardrails.strictUiApiRoutes>
    </properties>
 
