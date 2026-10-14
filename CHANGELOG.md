@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- G1 default allow-lists include qbit-email's published API: artifact `com.kingsrook.qbits:qbit-email` and package `com.kingsrook.qbits.email.api` (as for qbit-object-storage), so consumers need no per-repo allow-list.
+
 ## [2.1.0] - 2026-10-13
 
 ### Added

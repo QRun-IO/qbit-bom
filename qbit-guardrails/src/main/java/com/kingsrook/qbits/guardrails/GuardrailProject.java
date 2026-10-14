@@ -76,8 +76,8 @@ final class GuardrailProject
     ***************************************************************************/
    Set<String> apiPackages() throws IOException
    {
-      Set<String> packages = new TreeSet<>(csv(System.getProperty("qbit.guardrails.allowedApiPackages", "com.kingsrook.qbits.objectstorage.api")));
-      List<String> allowedArtifacts = csv(System.getProperty("qbit.guardrails.allowedQbitArtifacts", "com.kingsrook.qbits:qbit-object-storage,com.kingsrook.qbits:*-api"));
+      Set<String> packages = new TreeSet<>(csv(System.getProperty("qbit.guardrails.allowedApiPackages", "com.kingsrook.qbits.objectstorage.api,com.kingsrook.qbits.email.api")));
+      List<String> allowedArtifacts = csv(System.getProperty("qbit.guardrails.allowedQbitArtifacts", "com.kingsrook.qbits:qbit-object-storage,com.kingsrook.qbits:qbit-email,com.kingsrook.qbits:*-api"));
       String classpath = System.getProperty("surefire.test.class.path", System.getProperty("java.class.path"));
       for(String entry : classpath.split(Pattern.quote(File.pathSeparator)))
       {
