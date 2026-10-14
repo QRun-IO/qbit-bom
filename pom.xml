@@ -46,7 +46,7 @@
       <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
       <!-- use revision property in children -->
-      <revision>2.1.1</revision>
+      <revision>2.1.2</revision>
       <!-- Do not use revision here: children override it with their own version. -->
       <qbit.guardrails.version>2.1.0</qbit.guardrails.version>
       <qbit.guardrails.enforce>false</qbit.guardrails.enforce>
