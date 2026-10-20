@@ -1,5 +1,5 @@
 profile: qbit
-orb_version: dev:central-ef182c6c1ea887d8
+orb_version: 0.7.0
 default_branch: main
 java_version: '21'
 browsers: true
@@ -13,3 +13,4 @@ publish:
   release_candidate: true
   release: true
   asciidoc: false
+release_completion: false
